@@ -1,1 +1,447 @@
-(()=>{"use strict";var a={440:(a,e,t)=>{t.r(e)},128:(a,e)=>{Object.defineProperty(e,"__esModule",{value:!0});var t=function(){function a(a,e,t){void 0===t&&(t=!1),this.leftPageNum=4,this.rightPageNum=0,this.onPageNumTurn=null,this.showOnlyOnePage=!1,this.ulPagingContainer=a,this.onPageNumTurn=e,this.showOnlyOnePage=t}return a.prototype.bindPageNumTurnEvent=function(){var a=this;$(this.ulPagingContainer).find("li").click((function(e){e.preventDefault();var t=$(this);if(!t.hasClass("active")&&!t.hasClass("disabled")){var i=t.children("a").text();if(i){var n=parseInt(i);a.onPageNumTurn&&a.onPageNumTurn(n)}}}))},a.prototype.createPagingLi=function(a,e){var t="";if(e<6)for(var i=1;i<=e;i++)t+='<li class="page-item',a===i&&(t+=" active"),t+='"><a class="page-link" href="javascript:void(0);">'+i+"</a></li>";else{if(this.rightPageNum=e-3,t=1===a?'<li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>':'<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>',a<this.leftPageNum)if(e>5){for(var n=2;n<this.leftPageNum;n++)t+='<li class="page-item',a===n&&(t+=" active"),t+='"><a class="page-link" href="javascript:void(0);">'+n+"</a></li>";t+='<li class="page-item disabled"><a class="page-link" href="javascript:void(0);">...</a></li>'}else for(n=2;n<e;n++)t+='<li class="page-item',a===n&&(t+=" active"),t+='"><a class="page-link" href="javascript:void(0);">'+n+"</a></li>";else if(t+='"><a class="page-link disabled" href="javascript:void(0);">...</a></li>',a<this.rightPageNum)t+='"><a class="page-link" href="javascript:void(0);">'+(a-1)+"</a></li>",t+='"><a class="page-link active" href="javascript:void(0);">'+a+"</a></li>",t+='"><a class="page-link" href="javascript:void(0);">'+(a+1)+"</a></li>";else for(n=this.rightPageNum;n<e;n++)t+='<li class="page-item',a===n&&(t+=" active"),t+='"><a class="page-link" href="javascript:void(0);">'+n+"</a></li>";t+=a===e?'<li class="page-item active"><a class="page-link" href="javascript:void(0);">'+e+"</a></li>":'<li class="page-item"><a class="page-link" href="javascript:void(0);">'+e+"</a></li>"}1===e?this.showOnlyOnePage&&(t='<ul class="pagination">'+t+"</ul>",$(this.ulPagingContainer).html(t),this.bindPageNumTurnEvent()):(t='<ul class="pagination">'+t+"</ul>",$(this.ulPagingContainer).html(t),this.bindPageNumTurnEvent())},a}();e.default=t},245:(a,e)=>{Object.defineProperty(e,"__esModule",{value:!0}),String.prototype.isEmail=function(){var a=this.replace(" ","");return!!/^([\w-.]+)@([\w_-]+\.)+([a-zA-Z0-9]+)/i.test(a)},String.prototype.iso8601ToLocal=function(){return this.replace(/T/g," ")},Date.prototype.format=function(a){var e={"M+":this.getMonth()+1,"d+":this.getDate(),"H+":this.getHours(),"m+":this.getMinutes(),"s+":this.getSeconds(),"q+":Math.floor((this.getMonth()+3)/3),S:this.getMilliseconds()};for(var t in/(y+)/.test(a)&&(a=a.replace(RegExp.$1,(this.getFullYear()+"").substr(4-RegExp.$1.length))),e)if(e.hasOwnProperty(t)&&new RegExp("("+t+")").test(a)){var i=e[t];a=a.replace(RegExp.$1,1===RegExp.$1.length?i:("00"+i).substr((""+i).length))}return a},String.prototype.iso8601ToDate=function(){return new Date(this)}},356:(a,e)=>{Object.defineProperty(e,"__esModule",{value:!0});var t={getIdByRoute:function(){var a=location.pathname.split("/").filter((function(a){return!!a}));return a[a.length-1]},pickUpUrlParams:function(){var a=location.search,e={keys:[],params:{},get:function(a){return""}};if(-1!==a.indexOf("?")){for(var t=a.substr(1).split("&"),i=[],n={},s=0;s<t.length;s++){var r=t[s].split("="),l=r[0].toLocaleLowerCase();n[l]?n[l]=[n[l],unescape(r[1])]:n[l]=unescape(r[1]),i.push(l)}e.keys=i,e.params=n,e.get=function(a){var e=a.toLocaleLowerCase();return i.includes(e)?n[a]:""}}return e}};e.default=t},572:(a,e,t)=>{Object.defineProperty(e,"__esModule",{value:!0}),t(245),t(440);var i,n=(i=function(a,e){void 0===e&&(e=!1);var t=a.Tags.split("|").map((function(a){return'<span class="badge badge-info">'+a+"</span>"}));return'<div class="blogInfo">\n    <div class=\'b-left\'>\n        <img src="'+a.CoverImg+"\" />\n    </div>\n    <div class='b-right'>\n        <h3>\n            <a href=\"/Essays/Details/"+a.Slug+'">'+a.Title+"</a>"+function(a,e){return void 0===a&&(a=!1),void 0===e&&(e=!1),console.log(a,e),e&&a?'<span class="badge badge-success square badge-sticky">置顶</span>':null}(a.Sticky,e)+"\n        </h3>\n        <p>"+a.Introduce+'</p>\n        <div class="sapnContainer">\n            <span class="fa fa-bookmark" aria-hidden="true">'+a.EssayType+'</span>\n            <span class="fa fa-tags">\n                '+t.join(" ")+'\n            </span>\n            <span class="fa fa-calendar">'+a.Modify.iso8601ToDate().format("yyyy-MM-dd HH:mm:ss")+'</span>\n            <div class="pull-right">\n                <span class="fa fa-eye">'+a.ReadNum+'</span>\n                <span class="fa fa-thumbs-o-up">\n                    '+a.Praise+'\n                </span><span class="fa fa-thumbs-o-down">'+a.Criticize+'</span>\n            </div>\n            <div class="clearfix"></div>\n        </div>\n    </div>\n</div>'},{create:function(a,e,t){void 0===t&&(t=!1);var n=function(a,e){return void 0===e&&(e=!1),a.map((function(a){return i(a,e)})).join(" ")}(a,t);document.querySelector(e).innerHTML=n}});e.default=n},848:(a,e)=>{Object.defineProperty(e,"__esModule",{value:!0});var t={showLoading:function(a){void 0===a&&(a=null);var e="加载中...";a&&(e=a),$("#gLoading .loading-text").html(e),$("#gLoading").css("display","block")},hideLoading:function(){$("#gLoading").css("display","none")},alert:function(a,e){void 0===e&&(e=null);var t={time:2e3,title:"提示"};e?"function"==typeof e?window.layer.alert(a,t,e):($.extend(e,t),window.layer.alert(a,e)):window.layer.alert(a,t)}};e.default=t},102:function(a,e,t){var i=this&&this.__importDefault||function(a){return a&&a.__esModule?a:{default:a}};Object.defineProperty(e,"__esModule",{value:!0});var n=i(t(356)),s=i(t(128)),r=i(t(572)),l=i(t(848));!function(){var a=n.default.pickUpUrlParams(),e=a.get("id");e||(location.href="/Home");var t=new s.default("#paginationContainer",i);function i(a){void 0===a&&(a=1);var i={id:e,page:a};l.default.showLoading(),$.ajax({type:"get",url:"/api/Essays/EssayType",data:i,success:function(a){if(0===a.Code){var e=a.Data;console.log(e.Essays);var i='<a class="btn btn-light">'+e.Taxonomy.Name+'</a> <small style="font-size:16px;">共有<span class="bg-navy pl-1 pr-1">'+e.Taxonomy.Num+"</span>文章</small>";$("#taxonomy").html(i),r.default.create(e.Essays,"#bIContainer"),t.createPagingLi(e.PageIndex,e.TotalPages)}},complete:function(){l.default.hideLoading()}})}var o=a.get("page");o?i(parseInt(o)):i()}()}},e={};function t(i){var n=e[i];if(void 0!==n)return n.exports;var s=e[i]={exports:{}};return a[i].call(s.exports,s,s.exports,t),s.exports}t.r=a=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(a,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(a,"__esModule",{value:!0})},t(102)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/scss/components/_blogSummary.scss":
+/*!***********************************************!*\
+  !*** ./src/scss/components/_blogSummary.scss ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./common/Paging.ts":
+/*!**************************!*\
+  !*** ./common/Paging.ts ***!
+  \**************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var Paging = /** @class */ (function () {
+    /**
+     *
+     * @param ulPagingContainer ul容器
+     * @param onPageNumTurn 当页面变化时的回调事件
+     */
+    function Paging(ulPagingContainer, onPageNumTurn, showOnlyOnePage) {
+        if (showOnlyOnePage === void 0) { showOnlyOnePage = false; }
+        this.leftPageNum = 4;
+        this.rightPageNum = 0;
+        this.onPageNumTurn = null;
+        this.showOnlyOnePage = false;
+        this.ulPagingContainer = ulPagingContainer;
+        this.onPageNumTurn = onPageNumTurn;
+        this.showOnlyOnePage = showOnlyOnePage;
+    }
+    Paging.prototype.bindPageNumTurnEvent = function () {
+        var self = this;
+        $(this.ulPagingContainer).find("li").click(function (e) {
+            e.preventDefault();
+            var $Li = $(this);
+            if ($Li.hasClass("active") || $Li.hasClass("disabled")) {
+                return;
+            }
+            else {
+                var pageNumStr = $Li.children('a').text();
+                if (pageNumStr) {
+                    var pageNum = parseInt(pageNumStr);
+                    if (self.onPageNumTurn) {
+                        self.onPageNumTurn(pageNum);
+                    }
+                }
+            }
+        });
+    };
+    Paging.prototype.createPagingLi = function (activePageNum, maxPageNum) {
+        if (maxPageNum === 1 && !this.showOnlyOnePage) {
+            return;
+        }
+        var htmlStr = '';
+        // 总页数小于6
+        if (maxPageNum < 6) {
+            for (var j = 1; j <= maxPageNum; j++) {
+                htmlStr += "<li class=\"page-item";
+                if (activePageNum === j) {
+                    htmlStr += ' active';
+                }
+                htmlStr += "\"><a class=\"page-link\" href=\"javascript:void(0);\">" + j + "</a></li>";
+            }
+        }
+        else {
+            this.rightPageNum = maxPageNum - 3;
+            if (activePageNum < this.leftPageNum) {
+                for (var j = 1; j <= this.leftPageNum; j++) {
+                    htmlStr += "<li class=\"page-item";
+                    if (activePageNum === j) {
+                        htmlStr += ' active';
+                    }
+                    htmlStr += "\"><a class=\"page-link\" href=\"javascript:void(0);\">" + j + "</a></li>";
+                }
+                htmlStr += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"javascript:void(0);\">...</a></li>";
+                htmlStr += "<li class=\"page-item\"><a class=\"page-link\" href=\"javascript:void(0);\">" + maxPageNum + "</a></li>";
+            }
+            else if (activePageNum > this.rightPageNum) {
+                htmlStr = '<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>';
+                htmlStr += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"javascript:void(0);\">...</a></li>";
+                for (var j = this.rightPageNum; j <= maxPageNum; j++) {
+                    htmlStr += "<li class=\"page-item";
+                    if (activePageNum === j) {
+                        htmlStr += ' active';
+                    }
+                    htmlStr += "\"><a class=\"page-link\" href=\"javascript:void(0);\">" + j + "</a></li>";
+                }
+            }
+            else {
+                htmlStr = '<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>';
+                htmlStr += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"javascript:void(0);\">...</a></li>";
+                htmlStr += "<li class=\"page-item\"><a class=\"page-link\" href=\"javascript:void(0);\">" + (activePageNum - 1) + "</a></li>";
+                htmlStr += "<li class=\"page-item active\"><a class=\"page-link\" href=\"javascript:void(0);\">" + activePageNum + "</a></li>";
+                htmlStr += "<li class=\"page-item\"><a class=\"page-link\" href=\"javascript:void(0);\">" + (activePageNum + 1) + "</a></li>";
+                htmlStr += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"javascript:void(0);\">...</a></li>";
+                htmlStr += "<li class=\"page-item\"><a class=\"page-link\" href=\"javascript:void(0);\">" + maxPageNum + "</a></li>";
+            }
+        }
+        htmlStr = "<ul class=\"pagination\">" + htmlStr + "</ul>";
+        $(this.ulPagingContainer).html(htmlStr);
+        this.bindPageNumTurnEvent();
+    };
+    return Paging;
+}());
+exports.default = Paging;
+
+
+/***/ }),
+
+/***/ "./common/extensions/global.ts":
+/*!*************************************!*\
+  !*** ./common/extensions/global.ts ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+String.prototype.isEmail = function () {
+    var email = this.replace(" ", "");
+    var pattern = /^([\w-.]+)@([\w_-]+\.)+([a-zA-Z0-9]+)/i;
+    var flag = pattern.test(email);
+    if (flag) {
+        return true;
+    }
+    else {
+        return false;
+    }
+};
+String.prototype.iso8601ToLocal = function () {
+    var str = this.replace(/T/g, ' ');
+    return str;
+};
+Date.prototype.format = function (fmt) {
+    var o = {
+        "M+": this.getMonth() + 1,
+        "d+": this.getDate(),
+        "H+": this.getHours(),
+        "m+": this.getMinutes(),
+        "s+": this.getSeconds(),
+        "q+": Math.floor((this.getMonth() + 3) / 3),
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o) {
+        if (o.hasOwnProperty(k)) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                var okValue = o[k];
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1)
+                    ? okValue
+                    : (("00" + okValue).substr(("" + okValue).length)));
+            }
+        }
+    }
+    return fmt;
+};
+String.prototype.iso8601ToDate = function () {
+    return new Date(this);
+};
+
+
+/***/ }),
+
+/***/ "./common/util.ts":
+/*!************************!*\
+  !*** ./common/util.ts ***!
+  \************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var getIdByRoute = function () {
+    var pathInfo = location.pathname.split('/')
+        .filter(function (item) {
+        if (item) {
+            return true;
+        }
+        return false;
+    });
+    return pathInfo[pathInfo.length - 1];
+};
+var pickUpUrlParams = function () {
+    var url = location.search; //获取url中"?"符后的字串 
+    var urlParamInfo = {
+        keys: [],
+        params: {},
+        get: function (key) {
+            return "";
+        }
+    };
+    if (url.indexOf("?") !== -1) {
+        var str = url.substr(1);
+        var requestPairArr = str.split("&");
+        var keyArr_1 = [];
+        var params_1 = {};
+        for (var i = 0; i < requestPairArr.length; i++) {
+            var paramPair = requestPairArr[i].split("=");
+            var key = paramPair[0].toLocaleLowerCase();
+            if (params_1[key]) {
+                params_1[key] = [params_1[key], unescape(paramPair[1])];
+            }
+            else {
+                params_1[key] = unescape(paramPair[1]);
+            }
+            keyArr_1.push(key);
+        }
+        var get = function (key) {
+            var lowKey = key.toLocaleLowerCase();
+            if (keyArr_1.includes(lowKey)) {
+                return params_1[key];
+            }
+            else {
+                return "";
+            }
+        };
+        urlParamInfo.keys = keyArr_1;
+        urlParamInfo.params = params_1;
+        urlParamInfo.get = get;
+    }
+    return urlParamInfo;
+};
+var util = {
+    "getIdByRoute": getIdByRoute,
+    "pickUpUrlParams": pickUpUrlParams
+};
+exports.default = util;
+
+
+/***/ }),
+
+/***/ "./src/ts/common/blogSummary.ts":
+/*!**************************************!*\
+  !*** ./src/ts/common/blogSummary.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__webpack_require__(/*! ../../../common/extensions/global */ "./common/extensions/global.ts");
+__webpack_require__(/*! ../../scss/components/_blogSummary.scss */ "./src/scss/components/_blogSummary.scss");
+var blogSummary = (function () {
+    var buildSticky = function (isSticky, showSticky) {
+        if (isSticky === void 0) { isSticky = false; }
+        if (showSticky === void 0) { showSticky = false; }
+        console.log(isSticky, showSticky);
+        if (!showSticky)
+            return "";
+        if (!isSticky)
+            return "";
+        return '<span class="badge badge-success square badge-sticky">置顶</span>';
+    };
+    var createItem = function (item, showSticky) {
+        if (showSticky === void 0) { showSticky = false; }
+        var tags = item.Tags.split('|').map(function (tag) {
+            return "<span class=\"badge badge-info\">" + tag + "</span>";
+        });
+        var itemStr = "<div class=\"blogInfo\">\n    <div class='b-left'>\n        <img src=\"" + item.CoverImg + "\" />\n    </div>\n    <div class='b-right'>\n        <h3>\n            <a href=\"/Essays/Details/" + item.Slug + "\">" + item.Title + "</a>" + buildSticky(item.Sticky, showSticky) + "\n        </h3>\n        <p>" + item.Introduce + "</p>\n        <div class=\"sapnContainer\">\n            <span class=\"fa fa-bookmark\" aria-hidden=\"true\">" + item.EssayType + "</span>\n            <span class=\"fa fa-tags\">\n                " + tags.join(" ") + "\n            </span>\n            <span class=\"fa fa-calendar\">" + item.Modify.iso8601ToDate().format("yyyy-MM-dd HH:mm:ss") + "</span>\n            <div class=\"pull-right\">\n                <span class=\"fa fa-eye\">" + item.ReadNum + "</span>\n                <span class=\"fa fa-thumbs-o-up\">\n                    " + item.Praise + "\n                </span><span class=\"fa fa-thumbs-o-down\">" + item.Criticize + "</span>\n            </div>\n            <div class=\"clearfix\"></div>\n        </div>\n    </div>\n</div>";
+        return itemStr;
+    };
+    var createSummarys = function (blogSummaryArr, showSticky) {
+        if (showSticky === void 0) { showSticky = false; }
+        var html = blogSummaryArr.map(function (item) {
+            return createItem(item, showSticky);
+        }).join(' ');
+        return html;
+    };
+    var create = function (data, selector, showSticky) {
+        if (showSticky === void 0) { showSticky = false; }
+        var summarys = createSummarys(data, showSticky);
+        document.querySelector(selector).innerHTML = summarys;
+    };
+    return {
+        create: create
+    };
+})();
+exports.default = blogSummary;
+
+
+/***/ }),
+
+/***/ "./src/ts/common/global.ts":
+/*!*********************************!*\
+  !*** ./src/ts/common/global.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var Global = {
+    showLoading: function (text) {
+        if (text === void 0) { text = null; }
+        var showText = "加载中...";
+        if (text) {
+            showText = text;
+        }
+        $("#gLoading .loading-text").html(showText);
+        $("#gLoading").css("display", "block");
+    },
+    hideLoading: function () {
+        $("#gLoading").css("display", "none");
+    },
+    alert: function (text, obj) {
+        if (obj === void 0) { obj = null; }
+        var defaultObj = {
+            time: 2000,
+            title: "提示"
+        };
+        if (obj) {
+            if (typeof obj === "function") {
+                //callback
+                window.layer.alert(text, defaultObj, obj);
+            }
+            else {
+                $.extend(obj, defaultObj);
+                window.layer.alert(text, obj);
+            }
+        }
+        else {
+            window.layer.alert(text, defaultObj);
+        }
+    }
+};
+exports.default = Global;
+
+
+/***/ }),
+
+/***/ "./src/ts/pages/taxonomy-essayType.ts":
+/*!********************************************!*\
+  !*** ./src/ts/pages/taxonomy-essayType.ts ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var util_1 = __importDefault(__webpack_require__(/*! ../../../common/util */ "./common/util.ts"));
+var Paging_1 = __importDefault(__webpack_require__(/*! ../../../common/Paging */ "./common/Paging.ts"));
+var blogSummary_1 = __importDefault(__webpack_require__(/*! ../common/blogSummary */ "./src/ts/common/blogSummary.ts"));
+var global_1 = __importDefault(__webpack_require__(/*! ../common/global */ "./src/ts/common/global.ts"));
+(function () {
+    var allParams = util_1.default.pickUpUrlParams();
+    var taxonomyId = allParams.get("id");
+    if (!taxonomyId) {
+        location.href = "/Home";
+    }
+    var paging = new Paging_1.default("#paginationContainer", getData);
+    var searchsApi = "/api/Essays/EssayType";
+    function getData(page) {
+        if (page === void 0) { page = 1; }
+        var data = {
+            id: taxonomyId,
+            page: page
+        };
+        global_1.default.showLoading();
+        $.ajax({
+            type: "get",
+            url: searchsApi,
+            data: data,
+            success: function (msg) {
+                if (msg.Code !== 0) {
+                    return;
+                }
+                var pagingData = msg.Data;
+                console.log(pagingData.Essays);
+                var taxonomyInfo = "<a class=\"btn btn-light\">" + pagingData.Taxonomy.Name + "</a> <small style=\"font-size:16px;\">\u5171\u6709<span class=\"bg-navy pl-1 pr-1\">" + pagingData.Taxonomy.Num + "</span>\u6587\u7AE0</small>";
+                $("#taxonomy").html(taxonomyInfo);
+                blogSummary_1.default.create(pagingData.Essays, '#bIContainer');
+                paging.createPagingLi(pagingData.PageIndex, pagingData.TotalPages);
+            },
+            complete: function () {
+                global_1.default.hideLoading();
+            }
+        });
+    }
+    var page = allParams.get("page");
+    if (!page) {
+        getData();
+    }
+    else {
+        getData(parseInt(page));
+    }
+})();
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/ts/pages/taxonomy-essayType.ts");
+/******/ 	
+/******/ })()
+;
+//# sourceMappingURL=taxonomy-essayType.bundle.js.map

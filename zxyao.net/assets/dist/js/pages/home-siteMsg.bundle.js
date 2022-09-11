@@ -1,1 +1,934 @@
-(()=>{"use strict";var e={920:(e,t,i)=>{i.r(t)},970:(e,t,i)=>{i.r(t),i.d(t,{default:()=>u});const n="/api/Editor/CommentImg",a="/api/Editor/CommentFile",o="/api/Editor/BlogImg",l="/api/Editor/BlogFile",r="https://cdn.jsdelivr.net/gh/zxyao145/GhStatics/zxyao.net/assets",s={uploadUrl:"TinyUploadFile",accept:[{title:"文档",extensions:"doc,docx,xls,xlsx,ppt,pptx,pdf",mimeTypes:"application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/x-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/pdf"},{title:"压缩文件",extensions:"rar,zip,7z",mimeTypes:"application/octet-stream,application/x-zip-compressed,.7z"},{title:"图片",extensions:"gif,jpg,jpeg,bmp,png",mimeTypes:"image/gif,image/jpeg,image/bmp,image/png"},{title:"音视频",extensions:"flv,mkv,mp4,webm,mp3,wav",mimeTypes:"audio/wav,audio/mpeg,video/flv,video/mkv,video/mp4,video/webm"}]},c={uploadUrl:"TinyUploadImage",accept:[{title:"图片",extensions:"gif,jpg,jpeg,bmp,png",mimeTypes:"image/gif,image/jpeg,image/bmp,image/png"}]},p={uploadUrl:"TinyUploadVideo",accept:[{title:"音视频",extensions:"flv,mkv,mp4,webm,mp3,wav",mimeTypes:"audio/wav,audio/mpeg,video/flv,video/mkv,video/mp4,video/webm"}]},d=function(e,t,i,n,a=""){var o,l;(o=new XMLHttpRequest).withCredentials=!1,o.open("POST",e),o.onload=function(){var e;200==o.status?(e=JSON.parse(o.responseText))&&"string"==typeof e.Data.Url?i(a+e.Data.Url):n("Invalid JSON: "+o.responseText):n("HTTP Error: "+o.status)},l=new FormData;var r=t.blob();l.append("file",r,t.filename()),o.send(l)},m=function(e,t,i,n){var a;switch(n.filetype){case"file":a=s;break;case"image":a=c;break;case"media":a=p;break;default:a=s}var o="";$.each(a.accept,(function(e,t){o+=t.mimeTypes+","}));var l=document.createElement("input");l.setAttribute("type","file"),l.setAttribute("accept",o),l.onchange=function(){var i,n,a=this.files[0];(i=new XMLHttpRequest).withCredentials=!1,i.open("POST",e),i.onload=function(){var e;200==i.status?(e=JSON.parse(i.responseText))&&"string"==typeof e.Data.Url?t(e.Data.Url):failure("Invalid JSON: "+i.responseText):failure("HTTP Error: "+i.status)},(n=new FormData).append("file",a,a.name),i.send(n)},l.click()},u={basic:{plugins:["link image lists  hr anchor emoticons","searchreplace wordcount fullscreen insertdatetime media nonbreaking","save table contextmenu paste textcolor codesample"],menubar:!1,statusbar:!1,toolbar:"undo redo | removeformat | emoticons | bold italic underline strikethrough | forecolor backcolor | codesample blockquote | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table  hr",paste_word_valid_elements:"b,strong,i,em,h1,h2",image_advtab:!0,image_title:!1,automatic_uploads:!0,paste_data_images:!0,images_upload_handler:function(e,t,i){d(n,e,t,i,"")},file_picker_callback:function(e,t,i){m(a,e,0,i)}},full:{plugins:["code link image lists hr anchor textpattern emoticons","searchreplace wordcount fullscreen insertdatetime media nonbreaking","save table contextmenu powerpaste textcolor lineheight indent2em codesample"],external_plugins:{lineheight:r+"/libs/tinymce/5.2.0/plugins/lineheight/plugin.min.js",indent2em:r+"/libs/tinymce/5.2.0/plugins/indent2em/plugin.min.js",powerpaste:r+"/libs/tinymce/5.2.0/plugins/powerpaste/plugin.min.js"},menubar:!1,toolbar:"undo redo | pastetext | removeformat | formatselect fontselect fontsizeselect lineheightselect bold italic underline strikethrough | codesample blockquote | indent2em alignleft aligncenter alignright alignjustify | forecolor backcolor |  superscript subscript | bullist numlist  outdent indent | link image media table  hr | fullscreen code | emoticons",paste_word_valid_elements:"b,strong,i,em,h1,h2",image_advtab:!0,image_title:!1,automatic_uploads:!0,paste_data_images:!0,powerpaste_allow_local_images:!0,powerpaste_word_import:"propmt",powerpaste_html_import:"propmt",images_upload_handler:function(e,t,i){d(o,e,t,i,"")},file_picker_callback:function(e,t,i){m(l,e,0,i)},file_browser_callback:function(e,t,i,n){!function(e,t,i,n){var a,o=0;switch(i){case"file":a=s,o=1;break;case"image":a=c,o=1;break;case"media":a=p,o=0;break;default:a=s,o=0}var l="";$.each(a.accept,(function(e,t){l+=t.mimeTypes+","}));var r=document.createElement("input");r.setAttribute("type","file"),r.setAttribute("accept",l),r.onchange=function(){var i,a,l=this.files[0];(i=new XMLHttpRequest).withCredentials=!1,i.open("POST",t),i.onload=function(){var t;if(200==i.status)if(t=JSON.parse(i.responseText)){var a=t.Data;if(n.document.getElementById(e).value="/Services/FileService.ashx?Action=Get&Name="+a[0].url,0!=o)for(var l=n.document.getElementsByTagName("input"),r=0;r<l.length;r++)if(l[r].id==e){r+o<l.length&&(l[r+o].value=a[0].fileName);break}}else failure("Invalid JSON: "+i.responseText);else failure("HTTP Error: "+i.status)},(a=new FormData).append("file",l,blobInfo.filename()),i.send(a)},r.click()}(e,t,i,n)},textpattern_patterns:[{start:"#",format:"h1"},{start:"##",format:"h2"},{start:"###",format:"h3"},{start:"####",format:"h4"},{start:"#####",format:"h5"},{start:"######",format:"h6"},{start:"*",end:"*",format:"italic"},{start:"**",end:"**",format:"bold"},{start:"* ",cmd:"InsertUnorderedList"},{start:"- ",cmd:"InsertUnorderedList"},{start:"1. ",cmd:"InsertOrderedList",value:{"list-style-type":"decimal"}},{start:"1) ",cmd:"InsertOrderedList",value:{"list-style-type":"decimal"}},{start:"a. ",cmd:"InsertOrderedList",value:{"list-style-type":"lower-alpha"}},{start:"a) ",cmd:"InsertOrderedList",value:{"list-style-type":"lower-alpha"}},{start:"i. ",cmd:"InsertOrderedList",value:{"list-style-type":"lower-roman"}},{start:"i) ",cmd:"InsertOrderedList",value:{"list-style-type":"lower-roman"}}]}}},399:function(e,t,i){var n=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var i in e)Object.hasOwnProperty.call(e,i)&&(t[i]=e[i]);return t.default=e,t},a=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0});var o=n(i(919)),l=a(i(970)),r=function(e,t){e.initialized?e.setContent(t):window.setTimeout((function(){r(e,t)}),2e3)},s={init:function(e,t,i,n,a,r){void 0===e&&(e="#tinyEditor"),void 0===t&&(t="basic"),void 0===i&&(i=440),void 0===n&&(n="100%"),void 0===a&&(a=null),void 0===r&&(r=null);var s="1 1.25 1.4 1.5 1.75 1.8 2";"full"===t&&(s="1 1.25 1.4 1.5 1.6 1.75 1.8 2 3 4 5");var c={selector:e,init_instance_callback:function(t){"function"==typeof r&&r(),t.on("blur",(function(i){$(e).val(t.getContent())}))},language:"zh_CN",language_url:"https://cdn.jsdelivr.net/gh/zxyao145/GhStatics/zxyao.net/assets/libs/tinymce/5.2.0/langs/zh_CN.js",width:n,height:i,theme:"silver",relative_urls:!1,browser_spellcheck:!1,fontsize_formats:"8pt 10pt 12pt 14pt 16pt 18pt 20pt 22pt 24pt 28pt 20pt 36pt",font_formats:"Times New Roman=times new roman,times;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;微软雅黑='微软雅黑';宋体='宋体';黑体='黑体';仿宋='仿宋';楷体='楷体';隶书='隶书'",lineheight_formats:s,paste_enable_default_filters:!0,codesample_languages:[{text:"C#",value:"csharp"},{text:"HTML/XML",value:"markup"},{text:"JavaScript",value:"javascript"},{text:"TypeScript",value:"ts"},{text:"Scss",value:"scss"},{text:"Python",value:"python"},{text:"Java",value:"java"},{text:"Markdown",value:"md"},{text:"YAML",value:"yml"},{text:"JSON",value:"json"},{text:"SQL",value:"sql"},{text:"Bash",value:"bash"},{text:"C",value:"c"},{text:"C++",value:"cpp"}]};a&&$.extend(c,a),$.extend(c,l.default[t]),o.init(c)},setContent:function(e,t){void 0===t&&(t="tinyEditor"),r(o.get(t),e)},getContent:function(e){void 0===e&&(e="tinyEditor");var t=o.get(e);return t.initialized?t.getContent():null}};t.default=s},245:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),String.prototype.isEmail=function(){var e=this.replace(" ","");return!!/^([\w-.]+)@([\w_-]+\.)+([a-zA-Z0-9]+)/i.test(e)},String.prototype.iso8601ToLocal=function(){return this.replace(/T/g," ")},Date.prototype.format=function(e){var t={"M+":this.getMonth()+1,"d+":this.getDate(),"H+":this.getHours(),"m+":this.getMinutes(),"s+":this.getSeconds(),"q+":Math.floor((this.getMonth()+3)/3),S:this.getMilliseconds()};for(var i in/(y+)/.test(e)&&(e=e.replace(RegExp.$1,(this.getFullYear()+"").substr(4-RegExp.$1.length))),t)if(t.hasOwnProperty(i)&&new RegExp("("+i+")").test(e)){var n=t[i];e=e.replace(RegExp.$1,1===RegExp.$1.length?n:("00"+n).substr((""+n).length))}return e},String.prototype.iso8601ToDate=function(){return new Date(this)}},848:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0});var i={showLoading:function(e){void 0===e&&(e=null);var t="加载中...";e&&(t=e),$("#gLoading .loading-text").html(t),$("#gLoading").css("display","block")},hideLoading:function(){$("#gLoading").css("display","none")},alert:function(e,t){void 0===t&&(t=null);var i={time:2e3,title:"提示"};t?"function"==typeof t?window.layer.alert(e,i,t):($.extend(t,i),window.layer.alert(e,t)):window.layer.alert(e,i)}};t.default=i},18:function(e,t,i){var n=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}},a=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var i in e)Object.hasOwnProperty.call(e,i)&&(t[i]=e[i]);return t.default=e,t};Object.defineProperty(t,"__esModule",{value:!0}),i(245);var o=n(i(399)),l=a(i(919));i(920);var r=function(){function e(e){this.setting=null,this.$selectorDom=null,this.$showReplyBox=null,this.setting=e,this.page=1,this.setting.paging&&(this.setting.pageCommentSize||(this.setting.pageCommentSize=10)),this.$showReplyBox=null}return e.prototype.init=function(){var t=this;this.$selectorDom=$(this.setting.selector),this.$selectorDom.html('\n<div class="cz-container">\n    <div class="row">\n        <textarea id="cz-editor"></textarea>\n    </div>\n    <div class="row cz-tool" style="margin-top: 2rem;">\n        <div class="col-md-5 col-sm-4 col-12 form-group" style="line-height: 34px;">\n            <input id="cz-nickName" type="text" required="required" class="form-control" placeholder="昵称(限长:8)" maxlength="8" />\n        </div>\n        <div class="col-md-5 col-sm-4 col-12 form-group" style="line-height: 34px;">\n            <input id="cz-email" type="email" required="required" class="form-control" placeholder="邮箱" />\n        </div>\n\n        <div class="col-md-2 col-sm-4 col-12 form-group">\n            <div class="pull-right">\n                <button class="btn btn-primary pull-right" id="cz-submit">评论</button>\n            </div>\n            <div class="clearfix"></div>\n        </div>\n    </div>\n    <div id="cz-comments" class="mt-4"></div>\n</div>'),this.queryComments(),o.default.init("#cz-editor","basic","240");var i=this;$("#cz-submit").click((function(n){n.preventDefault();var a=l.get("cz-editor").getContent(),o={NickName:$("#cz-nickName",i.$selectorDom).val(),Content:a,Email:$("#cz-email",i.$selectorDom).val(),Create:e.getNowDateFormat()};i.submitComment(o,(function(e){var n=i.createComment(e,"新");$("#cz-comments",i.$selectorDom).prepend(n),t.clear()}))}))},e.prototype.clear=function(){l.get("cz-editor").setContent(""),$("#cz-nickName",this.$selectorDom).val(""),$("#cz-email",this.$selectorDom).val("")},e.prototype.parseData=function(e){this.createComments(e)},e.prototype.createReplyComment=function(e){return'<div class="reply" id=\'cz-'+e.Id+"' data-id=\""+e.Id+'">\n            <div class="cz-reply-name"><a href="javascript:void(0)">'+e.NickName+'</a>:<a href="#cz-'+e.ReplyId+'">@'+e.ReplyName+"</a></div>\n            <p>"+e.Content+"</p>\n            <div class='reply-footer'><span>"+e.Create.iso8601ToDate().format("yyyy-MM-dd HH:mm:ss")+'</span><span class="reply-list-btn">回复</span></div>\n        </div>'},e.prototype.createComment=function(e,t){var i="";if(null!==e.ReplyBody&&e.ReplyBody.length>0){var n=this;i=e.ReplyBody.map((function(e){return n.createReplyComment(e)})).join(" ")}return'<div class="comment-info"  data-id="'+e.Id+'">\n            <div class="comment-left">\n                <header class=\'hidden-sm hidden-xs\'>\n                    <span><b>#'+t+'楼</b></span>\n                </header>\n            </div>\n            <div class="comment-right" id=\'cz-'+e.Id+"'>\n                <div class='cz-uname'>"+e.NickName+'</div>\n                <div class="comment-content-header"><span><i class="fa fa-clock-o"></i> '+e.Create.iso8601ToDate().format("yyyy-MM-dd HH:mm:ss")+'</span></div>\n                <div class="content">\n                    '+e.Content+'\n                </div>\n                <div class="comment-content-footer">\n                    <div class="row">                        \n                        <div class="col-12"><span class="reply-btn">回复</span></div>\n                    </div>\n                </div>\n                <div class="reply-list">'+i+"</div>\n            </div>\n        </div>"},e.prototype.createComments=function(e){var t=$("#cz-comments",this.$selectorDom),i=this,n=e.map((function(e,t){return i.createComment(e,t+1)})).join(" ");t.html(n),t.find(".reply-btn").click((function(e){i.replyClick(e.target)})),t.find(".reply-list-btn").click((function(e){i.replyClick(e.target)}))},e.prototype.replyClick=function(e){var t=this,i=$(e),n=i.parent().parent(),a=n.children(".replybox");if(a.length>0){if(this.$showReplyBox[0].isEqualNode(a[0]))return this.$showReplyBox.remove(),this.$showReplyBox=null,void l.get("cz-reply-editor").remove()}else null!==this.$showReplyBox&&(this.$showReplyBox.remove(),this.$showReplyBox=null,l.get("cz-reply-editor").remove());var r=$('<div class=\'replybox\'>\n                <textarea id=\'cz-reply-editor\' cols=\'80\' rows=\'50\' placeholder=\'来说几句吧......\' class=\'mytextarea\'></textarea>\n                <div class="row cz-tool">\n                    <div class="col-md-5 col-sm-4 col-12 form-group" style="line-height: 34px;">\n                        <input id="nickName2" type="text" required="required" class="form-control" placeholder="昵称(限长:8)" maxlength="8" data-cip-id="cz-nickName">\n                    </div>\n                    <div class="col-md-5 col-sm-4 col-12 form-group" style="line-height: 34px;">\n                        <input id="ema2" type="email" required="required" class="form-control" placeholder="邮箱" data-cip-id="cz-email">\n                    </div>\n\n                    <div class="col-md-2 col-sm-4 col-12 form-group send-container">\n                        <span class=\'send\'>发送</span>\n                    </div>\n                </div>\n            </div>');this.$showReplyBox=r,console.log("submit"),r.find(".send").click((function(e){var n,a,o=$(e.target),r=l.get("cz-reply-editor").getContent(),s=o.parents(".comment-right"),c=$("#nickName2").val(),p=$("#ema2").val();if(console.log(i[0]),i.hasClass("reply-list-btn")){var d=i.parents(".reply");n=d.data("id"),a=d.children(".cz-reply-name").children("a").eq(0).text()}else n=i.parents(".comment-info").data("id"),a=i.parents(".comment-right").children(".cz-uname").text();console.log(a);var m={ReplyId:n,Img:"N",NickName:c,Content:r,Email:p};t.submitComment(m,(function(e){e.ReplyName=a,console.log(t);var i=t.createReplyComment(e);$(".replybox").remove();var n=$(i);n.find(".reply-list-btn:last").click((function(){alert("不能回复自己")})),s.find(".reply-list").append(n)}))})),n.append(r),o.default.init("#cz-reply-editor","basic",200)},e.prototype.submitComment=function(t,i){t.Content?t.NickName?t.Email?t.Email.isEmail()?(t.Create||(t.Create=e.getNowDateFormat()),this.setting.commentSubmit(t,(function(e){"function"==typeof i&&i(e)}))):alert("邮箱格式不正确！"):alert("邮箱不能为空！"):alert("昵称不能为空！"):alert("回复内容不能为空！")},e.prototype.queryComments=function(e){void 0===e&&(e=1),this.setting.paging?(this.page=e,this.setting.queryComments(this,e,this.setting.pageCommentSize)):this.setting.queryComments(this)},e.getNowDateFormat=function(){var t=new Date;return t.getFullYear()+"-"+e.filterNum(t.getMonth()+1)+"-"+e.filterNum(t.getDate())+" "+e.filterNum(t.getHours())+":"+e.filterNum(t.getMinutes())+":"+e.filterNum(t.getSeconds())},e.filterNum=function(e){return e<10?"0"+e:e},e}();t.CommentZ=r,t.default=r},661:function(e,t,i){var n=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0});var a,o=i(18),l=n(i(848));a={selector:"#commentBox",editorConfig:n(i(970)).default.basic,queryComments:function(e){l.default.showLoading(),$.ajax({type:"get",url:"/api/Home/SiteMessages",success:function(t){0===t.Code&&e.parseData(t.Data)},complete:function(){l.default.hideLoading()}})},commentSubmit:function(e,t){var i=new FormData;for(var n in e)e.hasOwnProperty(n)&&i.append(n,e[n]);l.default.showLoading("操作中..."),$.ajax({url:"/api/Home/SubmitSiteMessage",type:"post",processData:!1,contentType:!1,data:i,success:function(e){console.log("submitComment",e),0===e.Code&&"function"==typeof t&&t(e.Data)},complete:function(){l.default.hideLoading(),l.default.alert("留言成功")}})},paging:!1},new o.CommentZ(a).init()},919:e=>{e.exports=tinymce}},t={};function i(n){var a=t[n];if(void 0!==a)return a.exports;var o=t[n]={exports:{}};return e[n].call(o.exports,o,o.exports,i),o.exports}i.d=(e,t)=>{for(var n in t)i.o(t,n)&&!i.o(e,n)&&Object.defineProperty(e,n,{enumerable:!0,get:t[n]})},i.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),i.r=e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i(661)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/scss/components/commentZ.scss":
+/*!*******************************************!*\
+  !*** ./src/scss/components/commentZ.scss ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./common/tinyMceConfig.js":
+/*!*********************************!*\
+  !*** ./common/tinyMceConfig.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/// <reference path="../libs/tinymce/5.2.0/plugins/lineheight/plugin.min.js" />
+/// <reference path="../libs/tinymce/5.2.0/plugins/lineheight/plugin.min.js" />
+
+const editorUpApi = {
+    comment: {
+        image: '/api/Editor/CommentImg',
+        file: '/api/Editor/CommentFile'
+    },
+    blog: {
+        image: '/api/Editor/BlogImg',
+        file: '/api/Editor/BlogFile'
+    }
+}
+
+const cdn = "https://cdn.jsdelivr.net/gh/zxyao145/JsDelivr@202206237/zxyao.net/assets";;
+
+
+const tinymceUploadConfig = {
+    file: {
+        uploadUrl: 'TinyUploadFile',
+        accept: [
+            {
+                title: '文档',
+                extensions: 'doc,docx,xls,xlsx,ppt,pptx,pdf',
+                mimeTypes:
+                    'application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,' +
+                        'application/vnd.ms-excel,application/x-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,' +
+                        'application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,' +
+                        'application/pdf'
+            },
+            {
+                title: '压缩文件',
+                extensions: 'rar,zip,7z',
+                mimeTypes: 'application/octet-stream,application/x-zip-compressed,.7z'
+            },
+            {
+                title: '图片',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/gif,image/jpeg,image/bmp,image/png'
+            },
+            {
+                title: '音视频',
+                extensions: 'flv,mkv,mp4,webm,mp3,wav',
+                mimeTypes: 'audio/wav,audio/mpeg,video/flv,video/mkv,video/mp4,video/webm'
+            }
+        ]
+    },
+    image: {
+        uploadUrl: 'TinyUploadImage',
+        accept: [
+            {
+                title: '图片',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/gif,image/jpeg,image/bmp,image/png'
+            }
+        ]
+
+    },
+    media: {
+        uploadUrl: 'TinyUploadVideo',
+        accept: [
+            {
+                title: '音视频',
+                extensions: 'flv,mkv,mp4,webm,mp3,wav',
+                mimeTypes: 'audio/wav,audio/mpeg,video/flv,video/mkv,video/mp4,video/webm'
+            }
+        ]
+    }
+};
+
+const tinyMceUploadImage = function (url, blobInfo, success, failure, basePath = "") {
+    var xhr, formData;
+    xhr = new XMLHttpRequest();
+    xhr.withCredentials = false;
+    xhr.open('POST', url);
+    xhr.onload = function () {
+        var json;
+        if (xhr.status != 200) {
+            failure('HTTP Error: ' + xhr.status);
+            return;
+        }
+        json = JSON.parse(xhr.responseText);
+
+        if (!json || typeof json.Data.Url != 'string') {
+            failure('Invalid JSON: ' + xhr.responseText);
+            return;
+        }
+        success(basePath + json.Data.Url);
+    };
+    formData = new FormData();
+    var file = blobInfo.blob();
+    formData.append('file', file, blobInfo.filename());
+    xhr.send(formData);
+};
+
+const tinyMceFileBrowserCallback = function (field_name, url, type, win) {
+    var uploadConfig;
+    var titleInputOff = 0;
+    switch (type) {
+        case 'file':
+            uploadConfig = tinymceUploadConfig.file;
+            titleInputOff = 1;
+            break;
+        case 'image':
+            uploadConfig = tinymceUploadConfig.image;
+            titleInputOff = 1;
+            break;
+        case 'media':
+            uploadConfig = tinymceUploadConfig.media;
+            titleInputOff = 0;
+            break;
+        default:
+            uploadConfig = tinymceUploadConfig.file;
+            titleInputOff = 0;
+    }
+    var allmimeTypes = '';
+    $.each(uploadConfig.accept, function (index, item) {
+        allmimeTypes += item.mimeTypes + ',';
+    });
+    var input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', allmimeTypes);
+    input.onchange = function () {
+        var file = this.files[0];
+        
+        var xhr, formData;
+        xhr = new XMLHttpRequest();
+        xhr.withCredentials = false;
+        xhr.open('POST', url);
+        xhr.onload = function () {
+            var json;
+            if (xhr.status != 200) {
+                failure('HTTP Error: ' + xhr.status);
+                return;
+            }
+            json = JSON.parse(xhr.responseText);
+
+            if (!json  ) {
+                failure('Invalid JSON: ' + xhr.responseText);
+                return;
+            }
+            //success
+            var files = json.Data;
+
+            {
+                win.document.getElementById(field_name).value =
+                    '/Services/FileService.ashx?Action=Get&Name=' + files[0].url;
+                if (titleInputOff == 0) return;
+                var inputlist = win.document.getElementsByTagName('input');
+                for (var i = 0; i < inputlist.length; i++) {
+                    if (inputlist[i].id == field_name) {
+                        if (i + titleInputOff < inputlist.length)
+                            inputlist[i + titleInputOff].value = files[0].fileName;
+                        break;
+                    }
+                }
+            }
+        };
+        formData = new FormData();
+        formData.append('file', file, blobInfo.filename());
+        xhr.send(formData);
+    };
+    input.click();
+};
+
+const filePickerCallback = function (url, callback, value, meta) {
+    var uploadConfig;
+    var type = meta.filetype;
+    switch (type) {
+    case 'file':
+        uploadConfig = tinymceUploadConfig.file;
+        break;
+    case 'image':
+        uploadConfig = tinymceUploadConfig.image;
+        break;
+    case 'media':
+        uploadConfig = tinymceUploadConfig.media;
+        break;
+    default:
+        uploadConfig = tinymceUploadConfig.file;
+    }
+    var allmimeTypes = '';
+    $.each(uploadConfig.accept, function (index, item) {
+        allmimeTypes += item.mimeTypes + ',';
+    });
+
+    var input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', allmimeTypes);
+    input.onchange = function () {
+        var file = this.files[0];
+        var xhr, formData;
+        xhr = new XMLHttpRequest();
+        xhr.withCredentials = false;
+        xhr.open('POST', url);
+        xhr.onload = function () {
+            var json;
+            if (xhr.status != 200) {
+                failure('HTTP Error: ' + xhr.status);
+                return;
+            }
+            json = JSON.parse(xhr.responseText);
+            if (!json || typeof json.Data.Url != 'string') {
+                failure('Invalid JSON: ' + xhr.responseText);
+                return;
+            }
+            callback(json.Data.Url);
+        };
+        formData = new FormData();
+        formData.append('file', file, file.name);
+        xhr.send(formData);
+    }
+    input.click();
+}
+
+
+const tinyMceConfig = {
+    "basic": {
+        plugins: [
+            'link image lists  hr anchor emoticons',
+            'searchreplace wordcount fullscreen insertdatetime media nonbreaking',
+            'save table contextmenu paste textcolor codesample'
+        ],
+        menubar: false,
+        statusbar: false,
+        toolbar:
+            'undo redo | removeformat | emoticons | bold italic underline strikethrough | forecolor backcolor | codesample blockquote | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table  hr',
+        paste_word_valid_elements: "b,strong,i,em,h1,h2",
+        image_advtab: true, //开启图片上传的高级选项功能
+        image_title: false, // 是否开启图片标题设置的选择，这里设置否
+        automatic_uploads: true, //开启点击图片上传时，自动进行远程上传操作
+        paste_data_images: true,
+        images_upload_handler:
+            function (blobInfo, success, failure) {
+                var url = editorUpApi.comment.image;
+                tinyMceUploadImage(url, blobInfo, success, failure, "");
+            },
+        file_picker_callback: function(callback, value, meta) {
+            var url = editorUpApi.comment.file;
+            filePickerCallback(url, callback, value, meta);
+        }
+    },
+    "full": {
+        plugins: [
+            'code link image lists hr anchor textpattern emoticons',
+            'searchreplace wordcount fullscreen insertdatetime media nonbreaking',
+            'save table contextmenu powerpaste textcolor lineheight indent2em codesample'
+        ],
+        external_plugins: {
+            'lineheight': cdn + '/libs/tinymce/5.2.0/plugins/lineheight/plugin.min.js',
+            'indent2em': cdn +'/libs/tinymce/5.2.0/plugins/indent2em/plugin.min.js',
+            'powerpaste': cdn + '/libs/tinymce/5.2.0/plugins/powerpaste/plugin.min.js',
+        },
+        //menubar: 'edit insert format table tools',
+        menubar: false,
+        toolbar:
+            'undo redo | pastetext | removeformat | formatselect fontselect fontsizeselect lineheightselect bold italic underline strikethrough | codesample blockquote | indent2em alignleft aligncenter alignright alignjustify | forecolor backcolor |  superscript subscript | bullist numlist  outdent indent | link image media table  hr | fullscreen code | emoticons',
+        paste_word_valid_elements: "b,strong,i,em,h1,h2",
+        image_advtab: true, //开启图片上传的高级选项功能
+        image_title: false, // 是否开启图片标题设置的选择，这里设置否
+        automatic_uploads: true, //开启点击图片上传时，自动进行远程上传操作
+
+        paste_data_images: true,
+        powerpaste_allow_local_images: true,
+        powerpaste_word_import: "propmt",
+        powerpaste_html_import: 'propmt',
+        images_upload_handler:
+            function (blobInfo, success, failure) {
+                var url = editorUpApi.blog.image;
+                tinyMceUploadImage(url, blobInfo, success, failure, "");
+            },
+        file_picker_callback: function (callback, value, meta) {
+            var url = editorUpApi.blog.file;
+            filePickerCallback(url, callback, value, meta);
+        },
+        file_browser_callback: function (field_name, url, type, win) {
+            tinyMceFileBrowserCallback(field_name, url, type, win);
+        },
+        //markdown
+        textpattern_patterns: [
+            { start: '#', format: 'h1' },
+            { start: '##', format: 'h2' },
+            { start: '###', format: 'h3' },
+            { start: '####', format: 'h4' },
+            { start: '#####', format: 'h5' },
+            { start: '######', format: 'h6' },
+            { start: '*', end: '*', format: 'italic' },
+            { start: '**', end: '**', format: 'bold' },
+            { start: '* ', cmd: 'InsertUnorderedList' },
+            { start: '- ', cmd: 'InsertUnorderedList' },
+            { start: '1. ', cmd: 'InsertOrderedList', value: { 'list-style-type': 'decimal' } },
+            { start: '1) ', cmd: 'InsertOrderedList', value: { 'list-style-type': 'decimal' } },
+            { start: 'a. ', cmd: 'InsertOrderedList', value: { 'list-style-type': 'lower-alpha' } },
+            { start: 'a) ', cmd: 'InsertOrderedList', value: { 'list-style-type': 'lower-alpha' } },
+            { start: 'i. ', cmd: 'InsertOrderedList', value: { 'list-style-type': 'lower-roman' } },
+            { start: 'i) ', cmd: 'InsertOrderedList', value: { 'list-style-type': 'lower-roman' } }
+        ]
+    }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (tinyMceConfig);
+
+/***/ }),
+
+/***/ "./common/TinyMceHelper.ts":
+/*!*********************************!*\
+  !*** ./common/TinyMceHelper.ts ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var tinymce = __importStar(__webpack_require__(/*! tinymce */ "tinymce"));
+// @ts-ignore TS7016
+var tinyMceConfig = __importStar(__webpack_require__(/*! ./tinyMceConfig.js */ "./common/tinyMceConfig.js"));
+var cdn = "https://cdn.jsdelivr.net/gh/zxyao145/JsDelivr@202206237/zxyao.net/assets";
+var primseHighLight = function () {
+    var allUeditorPreCode = $("#tinymce");
+    allUeditorPreCode.each(function () {
+        var $this = $(this);
+        var classVal = $this.attr('class');
+        var classArr = classVal.split(';');
+        classArr = classArr[0].split(':');
+        var lanClass = 'language-' + classArr[1];
+        $this.addClass("line-numbers")
+            .css("white-space", "pre-wrap");
+        $this.children('code').addClass(lanClass);
+        //var pre_content = '<code class="' + lan_class + '">' + $(this).children('code').html() + '</code>';
+        //$(this).html(pre_content);
+    });
+    window.Prism.highlightAll(); //js代码中调用此方法
+};
+var safeSetContent = function (editor, content) {
+    if (editor.initialized) {
+        editor.setContent(content);
+    }
+    else {
+        window.setTimeout(function () {
+            safeSetContent(editor, content);
+        }, 2000);
+    }
+};
+var tinyMceLoader = {
+    init: function (selector, tinymceType, height, width, otherConfig, onReady) {
+        if (selector === void 0) { selector = "#tinyEditor"; }
+        if (tinymceType === void 0) { tinymceType = "basic"; }
+        if (height === void 0) { height = 440; }
+        if (width === void 0) { width = "100%"; }
+        if (otherConfig === void 0) { otherConfig = null; }
+        if (onReady === void 0) { onReady = null; }
+        var lineheightFormats = "1 1.25 1.4 1.5 1.75 1.8 2";
+        if (tinymceType === 'full') {
+            lineheightFormats = '1 1.25 1.4 1.5 1.6 1.75 1.8 2 3 4 5';
+        }
+        var config = {
+            selector: selector,
+            init_instance_callback: function (editor) {
+                typeof onReady === 'function' && onReady();
+                //editor.setContent($(selector).val());
+                editor.on('blur', function (e) {
+                    $(selector).val(editor.getContent());
+                });
+                //editor.execCommand("fontName", false, "Arial");
+                //editor.execCommand("fontSize", false, "12pt");
+            },
+            language: 'zh_CN',
+            language_url: cdn + '/libs/tinymce/5.2.0/langs/zh_CN.js',
+            width: width,
+            height: height,
+            theme: 'silver',
+            relative_urls: false,
+            browser_spellcheck: false,
+            fontsize_formats: "8pt 10pt 12pt 14pt 16pt 18pt 20pt 22pt 24pt 28pt 20pt 36pt",
+            font_formats: "Times New Roman=times new roman,times;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;微软雅黑='微软雅黑';宋体='宋体';黑体='黑体';仿宋='仿宋';楷体='楷体';隶书='隶书'",
+            lineheight_formats: lineheightFormats,
+            paste_enable_default_filters: true,
+            //prism js language list
+            codesample_languages: [
+                { text: 'C#', value: 'csharp' },
+                { text: 'HTML/XML', value: 'markup' },
+                { text: 'JavaScript', value: 'javascript' },
+                { text: 'TypeScript', value: 'ts' },
+                { text: 'Scss', value: 'scss' },
+                { text: 'Python', value: 'python' },
+                { text: 'Java', value: 'java' },
+                { text: 'Markdown', value: 'md' },
+                { text: 'YAML', value: 'yml' },
+                { text: 'JSON', value: 'json' },
+                { text: 'SQL', value: 'sql' },
+                { text: 'Bash', value: 'bash' },
+                { text: 'C', value: 'c' },
+                { text: 'C++', value: 'cpp' }
+            ],
+        };
+        if (otherConfig) {
+            $.extend(config, otherConfig);
+        }
+        $.extend(config, tinyMceConfig[tinymceType]);
+        tinymce.init(config);
+    },
+    setContent: function (content, selector) {
+        if (selector === void 0) { selector = "tinyEditor"; }
+        safeSetContent(tinymce.get(selector), content);
+    },
+    getContent: function (selector) {
+        if (selector === void 0) { selector = "tinyEditor"; }
+        var editor = tinymce.get(selector);
+        if (editor.initialized) {
+            return editor.getContent();
+        }
+        else {
+            return null;
+        }
+    }
+};
+exports.default = tinyMceLoader;
+
+
+/***/ }),
+
+/***/ "./common/extensions/global.ts":
+/*!*************************************!*\
+  !*** ./common/extensions/global.ts ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+String.prototype.isEmail = function () {
+    var email = this.replace(" ", "");
+    var pattern = /^([\w-.]+)@([\w_-]+\.)+([a-zA-Z0-9]+)/i;
+    var flag = pattern.test(email);
+    if (flag) {
+        return true;
+    }
+    else {
+        return false;
+    }
+};
+String.prototype.iso8601ToLocal = function () {
+    var str = this.replace(/T/g, ' ');
+    return str;
+};
+Date.prototype.format = function (fmt) {
+    var o = {
+        "M+": this.getMonth() + 1,
+        "d+": this.getDate(),
+        "H+": this.getHours(),
+        "m+": this.getMinutes(),
+        "s+": this.getSeconds(),
+        "q+": Math.floor((this.getMonth() + 3) / 3),
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o) {
+        if (o.hasOwnProperty(k)) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                var okValue = o[k];
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1)
+                    ? okValue
+                    : (("00" + okValue).substr(("" + okValue).length)));
+            }
+        }
+    }
+    return fmt;
+};
+String.prototype.iso8601ToDate = function () {
+    return new Date(this);
+};
+
+
+/***/ }),
+
+/***/ "./src/ts/common/global.ts":
+/*!*********************************!*\
+  !*** ./src/ts/common/global.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var Global = {
+    showLoading: function (text) {
+        if (text === void 0) { text = null; }
+        var showText = "加载中...";
+        if (text) {
+            showText = text;
+        }
+        $("#gLoading .loading-text").html(showText);
+        $("#gLoading").css("display", "block");
+    },
+    hideLoading: function () {
+        $("#gLoading").css("display", "none");
+    },
+    alert: function (text, obj) {
+        if (obj === void 0) { obj = null; }
+        var defaultObj = {
+            time: 2000,
+            title: "提示"
+        };
+        if (obj) {
+            if (typeof obj === "function") {
+                //callback
+                window.layer.alert(text, defaultObj, obj);
+            }
+            else {
+                $.extend(obj, defaultObj);
+                window.layer.alert(text, obj);
+            }
+        }
+        else {
+            window.layer.alert(text, defaultObj);
+        }
+    }
+};
+exports.default = Global;
+
+
+/***/ }),
+
+/***/ "./src/ts/components/comment/CommentZ.ts":
+/*!***********************************************!*\
+  !*** ./src/ts/components/comment/CommentZ.ts ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__webpack_require__(/*! ../../../../common/extensions/global */ "./common/extensions/global.ts");
+var TinyMceHelper_1 = __importDefault(__webpack_require__(/*! ../../../../common/TinyMceHelper */ "./common/TinyMceHelper.ts"));
+var tinymce = __importStar(__webpack_require__(/*! tinymce */ "tinymce"));
+__webpack_require__(/*! ../../../scss/components/commentZ.scss */ "./src/scss/components/commentZ.scss");
+var CommentZ = /** @class */ (function () {
+    function CommentZ(setting) {
+        this.$selectorDom = null;
+        this.$showReplyBox = null;
+        this.setting = setting;
+        this.page = 1;
+        if (this.setting.paging) {
+            if (!this.setting.pageCommentSize) {
+                this.setting.pageCommentSize = 10;
+            }
+        }
+        this.$showReplyBox = null;
+    }
+    CommentZ.prototype.init = function () {
+        var _this = this;
+        this.$selectorDom = $(this.setting.selector);
+        var commentHtml = "\n<div class=\"cz-container\">\n    <div class=\"row\">\n        <textarea id=\"cz-editor\"></textarea>\n    </div>\n    <div class=\"row cz-tool\" style=\"margin-top: 2rem;\">\n        <div class=\"col-md-5 col-sm-4 col-12 form-group\" style=\"line-height: 34px;\">\n            <input id=\"cz-nickName\" type=\"text\" required=\"required\" class=\"form-control\" placeholder=\"\u6635\u79F0(\u9650\u957F:8)\" maxlength=\"8\" />\n        </div>\n        <div class=\"col-md-5 col-sm-4 col-12 form-group\" style=\"line-height: 34px;\">\n            <input id=\"cz-email\" type=\"email\" required=\"required\" class=\"form-control\" placeholder=\"\u90AE\u7BB1\" />\n        </div>\n\n        <div class=\"col-md-2 col-sm-4 col-12 form-group\">\n            <div class=\"pull-right\">\n                <button class=\"btn btn-primary pull-right\" id=\"cz-submit\">\u8BC4\u8BBA</button>\n            </div>\n            <div class=\"clearfix\"></div>\n        </div>\n    </div>\n    <div id=\"cz-comments\" class=\"mt-4\"></div>\n</div>";
+        this.$selectorDom.html(commentHtml);
+        this.queryComments();
+        TinyMceHelper_1.default.init("#cz-editor", "basic", "240");
+        var that = this;
+        $("#cz-submit").click(function (e) {
+            e.preventDefault();
+            var content = tinymce.get('cz-editor').getContent();
+            var nickName = $("#cz-nickName", that.$selectorDom).val();
+            var email = $("#cz-email", that.$selectorDom).val();
+            var comment = {
+                NickName: nickName,
+                Content: content,
+                Email: email,
+                Create: CommentZ.getNowDateFormat()
+            };
+            that.submitComment(comment, function (newComment) {
+                //TODO 更新楼层
+                var createComment = that.createComment(newComment, '新');
+                $("#cz-comments", that.$selectorDom).prepend(createComment);
+                _this.clear();
+            });
+        });
+    };
+    CommentZ.prototype.clear = function () {
+        tinymce.get('cz-editor').setContent("");
+        $("#cz-nickName", this.$selectorDom).val("");
+        $("#cz-email", this.$selectorDom).val("");
+    };
+    CommentZ.prototype.parseData = function (data) {
+        this.createComments(data);
+    };
+    CommentZ.prototype.createReplyComment = function (replyObj) {
+        return "<div class=\"reply\" id='cz-" + replyObj.Id + "' data-id=\"" + replyObj.Id + "\">\n            <div class=\"cz-reply-name\"><a href=\"javascript:void(0)\">" + replyObj.NickName + "</a>:<a href=\"#cz-" + replyObj.ReplyId + "\">@" + replyObj.ReplyName + "</a></div>\n            <p>" + replyObj.Content + "</p>\n            <div class='reply-footer'><span>" + replyObj.Create.iso8601ToDate().format("yyyy-MM-dd HH:mm:ss") + "</span><span class=\"reply-list-btn\">\u56DE\u590D</span></div>\n        </div>";
+    };
+    CommentZ.prototype.createComment = function (comment, index) {
+        var replyComments = '';
+        if (comment.ReplyBody !== null && comment.ReplyBody.length > 0) {
+            var that_1 = this;
+            replyComments = comment.ReplyBody.map(function (item) {
+                return that_1.createReplyComment(item);
+            }).join(' ');
+        }
+        var commentHtml = "<div class=\"comment-info\"  data-id=\"" + comment.Id + "\">\n            <div class=\"comment-left\">\n                <header class='hidden-sm hidden-xs'>\n                    <span><b>#" + index + "\u697C</b></span>\n                </header>\n            </div>\n            <div class=\"comment-right\" id='cz-" + comment.Id + "'>\n                <div class='cz-uname'>" + comment.NickName + "</div>\n                <div class=\"comment-content-header\"><span><i class=\"fa fa-clock-o\"></i> " + comment.Create.iso8601ToDate().format("yyyy-MM-dd HH:mm:ss") + "</span></div>\n                <div class=\"content\">\n                    " + comment.Content + "\n                </div>\n                <div class=\"comment-content-footer\">\n                    <div class=\"row\">                        \n                        <div class=\"col-12\"><span class=\"reply-btn\">\u56DE\u590D</span></div>\n                    </div>\n                </div>\n                <div class=\"reply-list\">" + replyComments + "</div>\n            </div>\n        </div>";
+        return commentHtml;
+    };
+    CommentZ.prototype.createComments = function (comments) {
+        var $czComments = $("#cz-comments", this.$selectorDom);
+        var that = this;
+        var commentsContent = comments.map(function (item, index) {
+            return that.createComment(item, index + 1);
+        }).join(" ");
+        $czComments.html(commentsContent);
+        $czComments.find(".reply-btn").click(function (e) {
+            that.replyClick(e.target);
+        });
+        $czComments.find(".reply-list-btn").click(function (e) {
+            that.replyClick(e.target);
+        });
+    };
+    CommentZ.prototype.replyClick = function (element) {
+        var _this = this;
+        var el = $(element);
+        var $replyBoxContainer = el.parent().parent();
+        var $newReplyBox = $replyBoxContainer.children(".replybox");
+        if ($newReplyBox.length > 0) {
+            if (this.$showReplyBox[0].isEqualNode($newReplyBox[0])) {
+                this.$showReplyBox.remove();
+                this.$showReplyBox = null;
+                tinymce.get("cz-reply-editor").remove();
+                return;
+            }
+        }
+        else {
+            if (this.$showReplyBox !== null) {
+                this.$showReplyBox.remove();
+                this.$showReplyBox = null;
+                tinymce.get("cz-reply-editor").remove();
+            }
+        }
+        var replyHtml = "<div class='replybox'>\n                <textarea id='cz-reply-editor' cols='80' rows='50' placeholder='\u6765\u8BF4\u51E0\u53E5\u5427......' class='mytextarea'></textarea>\n                <div class=\"row cz-tool\">\n                    <div class=\"col-md-5 col-sm-4 col-12 form-group\" style=\"line-height: 34px;\">\n                        <input id=\"nickName2\" type=\"text\" required=\"required\" class=\"form-control\" placeholder=\"\u6635\u79F0(\u9650\u957F:8)\" maxlength=\"8\" data-cip-id=\"cz-nickName\">\n                    </div>\n                    <div class=\"col-md-5 col-sm-4 col-12 form-group\" style=\"line-height: 34px;\">\n                        <input id=\"ema2\" type=\"email\" required=\"required\" class=\"form-control\" placeholder=\"\u90AE\u7BB1\" data-cip-id=\"cz-email\">\n                    </div>\n\n                    <div class=\"col-md-2 col-sm-4 col-12 form-group send-container\">\n                        <span class='send'>\u53D1\u9001</span>\n                    </div>\n                </div>\n            </div>";
+        var $replyHtml = $(replyHtml);
+        this.$showReplyBox = $replyHtml;
+        console.log("submit");
+        $replyHtml.find(".send").click(function (e) {
+            var $this = $(e.target);
+            var content = tinymce.get("cz-reply-editor").getContent(); //$("#cz-reply-editor").val();
+            var parentEl = $this.parents('.comment-right');
+            var nickName = $("#nickName2").val();
+            var ema = $("#ema2").val();
+            var id, beReplyName;
+            console.log(el[0]);
+            if (el.hasClass("reply-list-btn")) {
+                var $repltParent = el.parents(".reply");
+                id = $repltParent.data("id");
+                beReplyName = $repltParent
+                    .children(".cz-reply-name")
+                    .children("a").eq(0).text();
+            }
+            else {
+                id = el.parents(".comment-info").data("id");
+                beReplyName = el
+                    .parents(".comment-right")
+                    .children(".cz-uname")
+                    .text();
+            }
+            console.log(beReplyName);
+            var obj = {
+                ReplyId: id,
+                Img: "N",
+                NickName: nickName,
+                Content: content,
+                Email: ema
+            };
+            _this.submitComment(obj, function (newComment) {
+                newComment.ReplyName = beReplyName;
+                console.log(_this);
+                var replyString = _this.createReplyComment(newComment);
+                $(".replybox").remove();
+                var $replyString = $(replyString);
+                $replyString.find(".reply-list-btn:last").click(function () {
+                    alert("不能回复自己");
+                    return;
+                });
+                parentEl.find(".reply-list").append($replyString);
+            });
+        });
+        //评论回复事件
+        $replyBoxContainer.append($replyHtml);
+        TinyMceHelper_1.default.init("#cz-reply-editor", "basic", 200);
+    };
+    CommentZ.prototype.submitComment = function (comment, callBack) {
+        if (!comment.Content) {
+            alert("回复内容不能为空！");
+            return;
+        }
+        if (!comment.NickName) {
+            alert("昵称不能为空！");
+            return;
+        }
+        if (!comment.Email) {
+            alert("邮箱不能为空！");
+            return;
+        }
+        if (!comment.Email.isEmail()) {
+            alert("邮箱格式不正确！");
+            return;
+        }
+        if (!comment.Create) {
+            comment.Create = CommentZ.getNowDateFormat();
+        }
+        this.setting.commentSubmit(comment, function (newComment) {
+            typeof callBack === "function" && callBack(newComment);
+        });
+    };
+    CommentZ.prototype.queryComments = function (page) {
+        if (page === void 0) { page = 1; }
+        if (this.setting.paging) {
+            this.page = page;
+            this.setting.queryComments(this, page, this.setting.pageCommentSize);
+        }
+        else {
+            this.setting.queryComments(this);
+        }
+    };
+    /**
+     *
+     * Start 时间处理
+     */
+    CommentZ.getNowDateFormat = function () {
+        var nowDate = new Date();
+        var year = nowDate.getFullYear();
+        var month = CommentZ.filterNum(nowDate.getMonth() + 1);
+        var day = CommentZ.filterNum(nowDate.getDate());
+        var hours = CommentZ.filterNum(nowDate.getHours());
+        var min = CommentZ.filterNum(nowDate.getMinutes());
+        var seconds = CommentZ.filterNum(nowDate.getSeconds());
+        return year + "-" + month + "-" + day + " " + hours + ":" + min + ":" + seconds;
+    };
+    CommentZ.filterNum = function (num) {
+        if (num < 10) {
+            return "0" + num;
+        }
+        else {
+            return num;
+        }
+    };
+    return CommentZ;
+}());
+exports.CommentZ = CommentZ;
+exports.default = CommentZ;
+
+
+/***/ }),
+
+/***/ "./src/ts/pages/home-siteMsg.ts":
+/*!**************************************!*\
+  !*** ./src/ts/pages/home-siteMsg.ts ***!
+  \**************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var CommentZ_1 = __webpack_require__(/*! ../components/comment/CommentZ */ "./src/ts/components/comment/CommentZ.ts");
+var global_1 = __importDefault(__webpack_require__(/*! ../common/global */ "./src/ts/common/global.ts"));
+var tinyMceConfig_1 = __importDefault(__webpack_require__(/*! ../../../common/tinyMceConfig */ "./common/tinyMceConfig.js"));
+(function () {
+    //评论操作
+    var commentsApi = "/api/Home/SiteMessages";
+    var submitCommentApi = "/api/Home/SubmitSiteMessage";
+    var queryEssayComments = function (commentZ) {
+        global_1.default.showLoading();
+        $.ajax({
+            type: "get",
+            url: commentsApi,
+            success: function (msg) {
+                if (msg.Code === 0) {
+                    commentZ.parseData(msg.Data);
+                }
+            },
+            complete: function () {
+                global_1.default.hideLoading();
+            }
+        });
+    };
+    var submitComment = function (comment, callBack) {
+        var formData = new FormData();
+        for (var prop in comment) {
+            if (comment.hasOwnProperty(prop)) {
+                formData.append(prop, comment[prop]);
+            }
+        }
+        global_1.default.showLoading("操作中...");
+        $.ajax({
+            url: submitCommentApi,
+            type: 'post',
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function (msg) {
+                if (msg.Code === 0) {
+                    typeof callBack === "function" && callBack(msg.Data);
+                }
+            },
+            complete: function () {
+                global_1.default.hideLoading();
+                global_1.default.alert("留言成功");
+            }
+        });
+    };
+    var commentZSetting = {
+        selector: "#commentBox",
+        editorConfig: tinyMceConfig_1.default["basic"],
+        queryComments: queryEssayComments,
+        commentSubmit: submitComment,
+        paging: false
+    };
+    var commentZ = new CommentZ_1.CommentZ(commentZSetting);
+    commentZ.init();
+})();
+
+
+/***/ }),
+
+/***/ "tinymce":
+/*!**************************!*\
+  !*** external "tinymce" ***!
+  \**************************/
+/***/ ((module) => {
+
+module.exports = tinymce;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/ts/pages/home-siteMsg.ts");
+/******/ 	
+/******/ })()
+;
+//# sourceMappingURL=home-siteMsg.bundle.js.map

@@ -1,1 +1,218 @@
-(()=>{"use strict";var e={350:(e,a,t)=>{t.r(a)},136:function(e,a,t){var n=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(a,"__esModule",{value:!0}),t(350);var s=n(t(609));!function(){var e=s.default(".nav-container");s.default(".nav .nav-dd").on("mouseover",(function(e){s.default(this).hasClass("open")||s.default(this).children(".nav-dd-menu").addClass("active")})).on("mouseout",(function(e){s.default(this).hasClass("open")||s.default(this).children(".nav-dd-menu").removeClass("active")})).on("click",(function(e){var a=s.default(this);a.hasClass("open")?a.removeClass("open"):(a.addClass("open"),s.default(this).children(".nav-dd-menu").addClass("active"))})),s.default(".nav-toggle",e).on("click",(function(a){var t=s.default(".nav-menu",e);t.hasClass("nav-show")?t.removeClass("nav-show").addClass("nav-hide"):t.addClass("nav-show").removeClass("nav-hide")})),s.default(".search-container>a",e).on("click",(function(a){var t=s.default(".search-container .search-box",e);t.hasClass("active")?t.removeClass("active"):t.addClass("active")}));for(var a=s.default("title").text().split("-")[0].replace(" ",""),t=["首页","已往内容","点点滴滴","关于本站"],n=!0,r=0;r<t.length;r++)if(a.indexOf(t[r])>-1){s.default("#zxyNav li:contains("+a+")").addClass("active"),n=!1;break}n&&s.default("#zxyNav .active").removeClass("active"),function(){var a=location.pathname.toLocaleLowerCase();a||(a="/");var t=a.split("/").filter((function(e){return e}));1===t.length&&t.push("index"),"/home/index"==(a="/"+t.join("/"))&&(a="/"),s.default("li.active",e).removeClass("active"),s.default(".nav-link",e).each((function(e,t){var n=s.default(t).attr("href");if(n&&(n=n.toLowerCase(),a===n)){var r=s.default(t).parent("li");return r.addClass("active"),r.parents(".nav-dd").addClass("active"),!1}}))}(),s.default(".search-container .btn-search-submit",e).on("click",(function(e){e.preventDefault();var a=s.default(".search-val").val(),t=a;if(t){for(var n=[],r=/"[\S]*"/g,l=r.exec(t);l;)n.push(l[0]),t=t.replace(l[0],""),l=r.exec(t);var o=(t=t.trim().replace(/\s+/g," ")).split(" ");n=n.concat(o);for(var i=0;i<n.length;i++)n[i]="q="+n[i];window.location.href="/Essays/Search?oq="+a+"&"+n.join("&")}}))}()},609:e=>{e.exports=jQuery}},a={};function t(n){var s=a[n];if(void 0!==s)return s.exports;var r=a[n]={exports:{}};return e[n].call(r.exports,r,r.exports,t),r.exports}t.r=e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t(136)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/scss/layout/index.scss":
+/*!************************************!*\
+  !*** ./src/scss/layout/index.scss ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/ts/layout/index.ts":
+/*!********************************!*\
+  !*** ./src/ts/layout/index.ts ***!
+  \********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__webpack_require__(/*! ../../scss/layout/index.scss */ "./src/scss/layout/index.scss");
+var jquery_1 = __importDefault(__webpack_require__(/*! jquery */ "jquery"));
+function navEventBind() {
+    var $navContainer = jquery_1.default(".nav-container");
+    /**
+     * 多级菜单
+     */
+    jquery_1.default(".nav .nav-dd").on("mouseover", function (e) {
+        var $this = jquery_1.default(this);
+        if (!$this.hasClass("open")) {
+            var $dropdownMenu = jquery_1.default(this).children(".nav-dd-menu");
+            $dropdownMenu.addClass("active");
+        }
+    }).on("mouseout", function (e) {
+        var $this = jquery_1.default(this);
+        if (!$this.hasClass("open")) {
+            var $dropdownMenu = jquery_1.default(this).children(".nav-dd-menu");
+            $dropdownMenu.removeClass("active");
+        }
+    }).on("click", function (e) {
+        var $this = jquery_1.default(this);
+        if ($this.hasClass("open")) {
+            $this.removeClass("open");
+        }
+        else {
+            $this.addClass("open");
+            var $dropdownMenu = jquery_1.default(this).children(".nav-dd-menu");
+            $dropdownMenu.addClass("active");
+        }
+    });
+    jquery_1.default(".nav-toggle", $navContainer).on("click", function (e) {
+        var $menu = jquery_1.default(".nav-menu", $navContainer);
+        if (!$menu.hasClass("nav-show")) {
+            $menu.addClass("nav-show")
+                .removeClass("nav-hide");
+        }
+        else {
+            $menu.removeClass("nav-show")
+                .addClass("nav-hide");
+        }
+    });
+    //搜索框显示
+    jquery_1.default(".search-container>a", $navContainer).on('click', function (e) {
+        var $searchBox = jquery_1.default(".search-container .search-box", $navContainer);
+        if ($searchBox.hasClass("active")) {
+            $searchBox.removeClass("active");
+        }
+        else {
+            $searchBox.addClass("active");
+        }
+    });
+    //判断那个导航栏高亮
+    var s = jquery_1.default("title").text().split("-")[0].replace(" ", "");
+    var navArr = ["首页", "已往内容", "点点滴滴", "关于本站"];
+    var isDefault = true;
+    for (var i = 0; i < navArr.length; i++) {
+        if (s.indexOf(navArr[i]) > -1) {
+            jquery_1.default("#zxyNav li:contains(" + s + ")").addClass("active");
+            isDefault = false;
+            break;
+        }
+    }
+    if (isDefault) {
+        jquery_1.default("#zxyNav .active").removeClass("active");
+    }
+    var defaultHref = '/';
+    var homeHref = '/home/index';
+    function checkHighLight() {
+        var pathname = location.pathname.toLocaleLowerCase();
+        if (!pathname) {
+            pathname = defaultHref;
+        }
+        var pathParamter = pathname.split('/')
+            .filter(function (e) {
+            return e;
+        });
+        if (pathParamter.length === 1) {
+            pathParamter.push('index');
+        }
+        pathname = '/' + pathParamter.join('/');
+        if (pathname === homeHref) {
+            pathname = defaultHref;
+        }
+        jquery_1.default('li.active', $navContainer).removeClass('active');
+        jquery_1.default('.nav-link', $navContainer)
+            .each(function (index, htmlEle) {
+            var href = jquery_1.default(htmlEle).attr('href');
+            if (href) {
+                href = href.toLowerCase();
+                if (pathname === href) {
+                    var $li = jquery_1.default(htmlEle).parent('li');
+                    $li.addClass('active');
+                    $li.parents('.nav-dd').addClass('active');
+                    return false;
+                }
+            }
+            return;
+        });
+    }
+    checkHighLight();
+    //搜索事件
+    jquery_1.default(".search-container .btn-search-submit", $navContainer).on("click", function (e) {
+        e.preventDefault();
+        var oq = jquery_1.default(".search-val").val();
+        var searchVal = oq;
+        if (!searchVal) {
+            return;
+        }
+        else {
+            var queryVals = [];
+            var reParten = /"[\S]*"/g;
+            var result = reParten.exec(searchVal);
+            while (result) {
+                queryVals.push(result[0]);
+                searchVal = searchVal.replace(result[0], "");
+                result = reParten.exec(searchVal);
+            }
+            searchVal = searchVal.trim().replace(/\s+/g, ' ');
+            ;
+            var searchOtherAndVals = searchVal.split(' ');
+            queryVals = queryVals.concat(searchOtherAndVals);
+            for (var i = 0; i < queryVals.length; i++) {
+                queryVals[i] = 'q=' + queryVals[i];
+            }
+            window.location.href = "/Essays/Search?oq=" + oq + "&" + queryVals.join('&');
+        }
+    });
+}
+navEventBind();
+
+
+/***/ }),
+
+/***/ "jquery":
+/*!*************************!*\
+  !*** external "jQuery" ***!
+  \*************************/
+/***/ ((module) => {
+
+module.exports = jQuery;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/ts/layout/index.ts");
+/******/ 	
+/******/ })()
+;
+//# sourceMappingURL=layout.bundle.js.map

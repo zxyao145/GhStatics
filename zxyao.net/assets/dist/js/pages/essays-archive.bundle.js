@@ -1,1 +1,399 @@
-(()=>{"use strict";var a={872:(a,e,i)=>{i.r(e)},128:(a,e)=>{Object.defineProperty(e,"__esModule",{value:!0});var i=function(){function a(a,e,i){void 0===i&&(i=!1),this.leftPageNum=4,this.rightPageNum=0,this.onPageNumTurn=null,this.showOnlyOnePage=!1,this.ulPagingContainer=a,this.onPageNumTurn=e,this.showOnlyOnePage=i}return a.prototype.bindPageNumTurnEvent=function(){var a=this;$(this.ulPagingContainer).find("li").click((function(e){e.preventDefault();var i=$(this);if(!i.hasClass("active")&&!i.hasClass("disabled")){var t=i.children("a").text();if(t){var n=parseInt(t);a.onPageNumTurn&&a.onPageNumTurn(n)}}}))},a.prototype.createPagingLi=function(a,e){var i="";if(e<6)for(var t=1;t<=e;t++)i+='<li class="page-item',a===t&&(i+=" active"),i+='"><a class="page-link" href="javascript:void(0);">'+t+"</a></li>";else{if(this.rightPageNum=e-3,i=1===a?'<li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>':'<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>',a<this.leftPageNum)if(e>5){for(var n=2;n<this.leftPageNum;n++)i+='<li class="page-item',a===n&&(i+=" active"),i+='"><a class="page-link" href="javascript:void(0);">'+n+"</a></li>";i+='<li class="page-item disabled"><a class="page-link" href="javascript:void(0);">...</a></li>'}else for(n=2;n<e;n++)i+='<li class="page-item',a===n&&(i+=" active"),i+='"><a class="page-link" href="javascript:void(0);">'+n+"</a></li>";else if(i+='"><a class="page-link disabled" href="javascript:void(0);">...</a></li>',a<this.rightPageNum)i+='"><a class="page-link" href="javascript:void(0);">'+(a-1)+"</a></li>",i+='"><a class="page-link active" href="javascript:void(0);">'+a+"</a></li>",i+='"><a class="page-link" href="javascript:void(0);">'+(a+1)+"</a></li>";else for(n=this.rightPageNum;n<e;n++)i+='<li class="page-item',a===n&&(i+=" active"),i+='"><a class="page-link" href="javascript:void(0);">'+n+"</a></li>";i+=a===e?'<li class="page-item active"><a class="page-link" href="javascript:void(0);">'+e+"</a></li>":'<li class="page-item"><a class="page-link" href="javascript:void(0);">'+e+"</a></li>"}1===e?this.showOnlyOnePage&&(i='<ul class="pagination">'+i+"</ul>",$(this.ulPagingContainer).html(i),this.bindPageNumTurnEvent()):(i='<ul class="pagination">'+i+"</ul>",$(this.ulPagingContainer).html(i),this.bindPageNumTurnEvent())},a}();e.default=i},245:(a,e)=>{Object.defineProperty(e,"__esModule",{value:!0}),String.prototype.isEmail=function(){var a=this.replace(" ","");return!!/^([\w-.]+)@([\w_-]+\.)+([a-zA-Z0-9]+)/i.test(a)},String.prototype.iso8601ToLocal=function(){return this.replace(/T/g," ")},Date.prototype.format=function(a){var e={"M+":this.getMonth()+1,"d+":this.getDate(),"H+":this.getHours(),"m+":this.getMinutes(),"s+":this.getSeconds(),"q+":Math.floor((this.getMonth()+3)/3),S:this.getMilliseconds()};for(var i in/(y+)/.test(a)&&(a=a.replace(RegExp.$1,(this.getFullYear()+"").substr(4-RegExp.$1.length))),e)if(e.hasOwnProperty(i)&&new RegExp("("+i+")").test(a)){var t=e[i];a=a.replace(RegExp.$1,1===RegExp.$1.length?t:("00"+t).substr((""+t).length))}return a},String.prototype.iso8601ToDate=function(){return new Date(this)}},356:(a,e)=>{Object.defineProperty(e,"__esModule",{value:!0});var i={getIdByRoute:function(){var a=location.pathname.split("/").filter((function(a){return!!a}));return a[a.length-1]},pickUpUrlParams:function(){var a=location.search,e={keys:[],params:{},get:function(a){return""}};if(-1!==a.indexOf("?")){for(var i=a.substr(1).split("&"),t=[],n={},s=0;s<i.length;s++){var l=i[s].split("="),r=l[0].toLocaleLowerCase();n[r]?n[r]=[n[r],unescape(l[1])]:n[r]=unescape(l[1]),t.push(r)}e.keys=t,e.params=n,e.get=function(a){var e=a.toLocaleLowerCase();return t.includes(e)?n[a]:""}}return e}};e.default=i},848:(a,e)=>{Object.defineProperty(e,"__esModule",{value:!0});var i={showLoading:function(a){void 0===a&&(a=null);var e="加载中...";a&&(e=a),$("#gLoading .loading-text").html(e),$("#gLoading").css("display","block")},hideLoading:function(){$("#gLoading").css("display","none")},alert:function(a,e){void 0===e&&(e=null);var i={time:2e3,title:"提示"};e?"function"==typeof e?window.layer.alert(a,i,e):($.extend(e,i),window.layer.alert(a,e)):window.layer.alert(a,i)}};e.default=i},307:function(a,e,i){var t=this&&this.__importDefault||function(a){return a&&a.__esModule?a:{default:a}};Object.defineProperty(e,"__esModule",{value:!0}),i(872);var n=t(i(128));i(245);var s=t(i(356)),l=t(i(848));!function(){var a=new n.default("#paginationContainer",(function(a){window.location.href="/Essays/Archive?page="+a}),!1);function e(e){void 0===e&&(e=1);var i={page:e};l.default.showLoading(),$.ajax({type:"get",url:"/api/Essays/Archive",data:i,success:function(e){var i=e.Data;!function(a){var e=a.map((function(a){var e=a.Tags.split("|").map((function(a){return'<span class="badge badge-info">'+a+"</span>"})).join(" ");return'<li>\n                    <div class="date col-lg-3 col-md-3 col-sm-3 col-12">\n                        <span>'+a.Modify.iso8601ToDate().format("yyyy-MM-dd HH:mm:ss")+'</span>\n                    </div>\n                    <div class="main col-lg-9 col-md-9 col-sm-9 col-12">\n                        <h3><a href="/Essays/Details/'+a.Slug+'">'+a.Title+'</a></h3>\n                        <div>\n                            <span class="fa fa-tags">'+e+'</span>\n                            <span class="fa fa-eye">'+a.ReadNum+'</span>\n                            <span class="fa fa-thumbs-up">'+a.Praise+'</span>\n                            <span class="fa fa-thumbs-down">'+a.Criticize+"</span>\n                        </div>\n                    </div>\n                </li>"})).join(" ");$("#trivialMain .timeline").html(e)}(i.Data),a.createPagingLi(i.PageIndex,i.TotalPages)},complete:function(){l.default.hideLoading()}})}var i=s.default.pickUpUrlParams().get("page");i?e(parseInt(i)):e()}()}},e={};function i(t){var n=e[t];if(void 0!==n)return n.exports;var s=e[t]={exports:{}};return a[t].call(s.exports,s,s.exports,i),s.exports}i.r=a=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(a,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(a,"__esModule",{value:!0})},i(307)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/scss/pages/essay-archive.scss":
+/*!*******************************************!*\
+  !*** ./src/scss/pages/essay-archive.scss ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./common/Paging.ts":
+/*!**************************!*\
+  !*** ./common/Paging.ts ***!
+  \**************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var Paging = /** @class */ (function () {
+    /**
+     *
+     * @param ulPagingContainer ul容器
+     * @param onPageNumTurn 当页面变化时的回调事件
+     */
+    function Paging(ulPagingContainer, onPageNumTurn, showOnlyOnePage) {
+        if (showOnlyOnePage === void 0) { showOnlyOnePage = false; }
+        this.leftPageNum = 4;
+        this.rightPageNum = 0;
+        this.onPageNumTurn = null;
+        this.showOnlyOnePage = false;
+        this.ulPagingContainer = ulPagingContainer;
+        this.onPageNumTurn = onPageNumTurn;
+        this.showOnlyOnePage = showOnlyOnePage;
+    }
+    Paging.prototype.bindPageNumTurnEvent = function () {
+        var self = this;
+        $(this.ulPagingContainer).find("li").click(function (e) {
+            e.preventDefault();
+            var $Li = $(this);
+            if ($Li.hasClass("active") || $Li.hasClass("disabled")) {
+                return;
+            }
+            else {
+                var pageNumStr = $Li.children('a').text();
+                if (pageNumStr) {
+                    var pageNum = parseInt(pageNumStr);
+                    if (self.onPageNumTurn) {
+                        self.onPageNumTurn(pageNum);
+                    }
+                }
+            }
+        });
+    };
+    Paging.prototype.createPagingLi = function (activePageNum, maxPageNum) {
+        if (maxPageNum === 1 && !this.showOnlyOnePage) {
+            return;
+        }
+        var htmlStr = '';
+        // 总页数小于6
+        if (maxPageNum < 6) {
+            for (var j = 1; j <= maxPageNum; j++) {
+                htmlStr += "<li class=\"page-item";
+                if (activePageNum === j) {
+                    htmlStr += ' active';
+                }
+                htmlStr += "\"><a class=\"page-link\" href=\"javascript:void(0);\">" + j + "</a></li>";
+            }
+        }
+        else {
+            this.rightPageNum = maxPageNum - 3;
+            if (activePageNum < this.leftPageNum) {
+                for (var j = 1; j <= this.leftPageNum; j++) {
+                    htmlStr += "<li class=\"page-item";
+                    if (activePageNum === j) {
+                        htmlStr += ' active';
+                    }
+                    htmlStr += "\"><a class=\"page-link\" href=\"javascript:void(0);\">" + j + "</a></li>";
+                }
+                htmlStr += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"javascript:void(0);\">...</a></li>";
+                htmlStr += "<li class=\"page-item\"><a class=\"page-link\" href=\"javascript:void(0);\">" + maxPageNum + "</a></li>";
+            }
+            else if (activePageNum > this.rightPageNum) {
+                htmlStr = '<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>';
+                htmlStr += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"javascript:void(0);\">...</a></li>";
+                for (var j = this.rightPageNum; j <= maxPageNum; j++) {
+                    htmlStr += "<li class=\"page-item";
+                    if (activePageNum === j) {
+                        htmlStr += ' active';
+                    }
+                    htmlStr += "\"><a class=\"page-link\" href=\"javascript:void(0);\">" + j + "</a></li>";
+                }
+            }
+            else {
+                htmlStr = '<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>';
+                htmlStr += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"javascript:void(0);\">...</a></li>";
+                htmlStr += "<li class=\"page-item\"><a class=\"page-link\" href=\"javascript:void(0);\">" + (activePageNum - 1) + "</a></li>";
+                htmlStr += "<li class=\"page-item active\"><a class=\"page-link\" href=\"javascript:void(0);\">" + activePageNum + "</a></li>";
+                htmlStr += "<li class=\"page-item\"><a class=\"page-link\" href=\"javascript:void(0);\">" + (activePageNum + 1) + "</a></li>";
+                htmlStr += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"javascript:void(0);\">...</a></li>";
+                htmlStr += "<li class=\"page-item\"><a class=\"page-link\" href=\"javascript:void(0);\">" + maxPageNum + "</a></li>";
+            }
+        }
+        htmlStr = "<ul class=\"pagination\">" + htmlStr + "</ul>";
+        $(this.ulPagingContainer).html(htmlStr);
+        this.bindPageNumTurnEvent();
+    };
+    return Paging;
+}());
+exports.default = Paging;
+
+
+/***/ }),
+
+/***/ "./common/extensions/global.ts":
+/*!*************************************!*\
+  !*** ./common/extensions/global.ts ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+String.prototype.isEmail = function () {
+    var email = this.replace(" ", "");
+    var pattern = /^([\w-.]+)@([\w_-]+\.)+([a-zA-Z0-9]+)/i;
+    var flag = pattern.test(email);
+    if (flag) {
+        return true;
+    }
+    else {
+        return false;
+    }
+};
+String.prototype.iso8601ToLocal = function () {
+    var str = this.replace(/T/g, ' ');
+    return str;
+};
+Date.prototype.format = function (fmt) {
+    var o = {
+        "M+": this.getMonth() + 1,
+        "d+": this.getDate(),
+        "H+": this.getHours(),
+        "m+": this.getMinutes(),
+        "s+": this.getSeconds(),
+        "q+": Math.floor((this.getMonth() + 3) / 3),
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o) {
+        if (o.hasOwnProperty(k)) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                var okValue = o[k];
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1)
+                    ? okValue
+                    : (("00" + okValue).substr(("" + okValue).length)));
+            }
+        }
+    }
+    return fmt;
+};
+String.prototype.iso8601ToDate = function () {
+    return new Date(this);
+};
+
+
+/***/ }),
+
+/***/ "./common/util.ts":
+/*!************************!*\
+  !*** ./common/util.ts ***!
+  \************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var getIdByRoute = function () {
+    var pathInfo = location.pathname.split('/')
+        .filter(function (item) {
+        if (item) {
+            return true;
+        }
+        return false;
+    });
+    return pathInfo[pathInfo.length - 1];
+};
+var pickUpUrlParams = function () {
+    var url = location.search; //获取url中"?"符后的字串 
+    var urlParamInfo = {
+        keys: [],
+        params: {},
+        get: function (key) {
+            return "";
+        }
+    };
+    if (url.indexOf("?") !== -1) {
+        var str = url.substr(1);
+        var requestPairArr = str.split("&");
+        var keyArr_1 = [];
+        var params_1 = {};
+        for (var i = 0; i < requestPairArr.length; i++) {
+            var paramPair = requestPairArr[i].split("=");
+            var key = paramPair[0].toLocaleLowerCase();
+            if (params_1[key]) {
+                params_1[key] = [params_1[key], unescape(paramPair[1])];
+            }
+            else {
+                params_1[key] = unescape(paramPair[1]);
+            }
+            keyArr_1.push(key);
+        }
+        var get = function (key) {
+            var lowKey = key.toLocaleLowerCase();
+            if (keyArr_1.includes(lowKey)) {
+                return params_1[key];
+            }
+            else {
+                return "";
+            }
+        };
+        urlParamInfo.keys = keyArr_1;
+        urlParamInfo.params = params_1;
+        urlParamInfo.get = get;
+    }
+    return urlParamInfo;
+};
+var util = {
+    "getIdByRoute": getIdByRoute,
+    "pickUpUrlParams": pickUpUrlParams
+};
+exports.default = util;
+
+
+/***/ }),
+
+/***/ "./src/ts/common/global.ts":
+/*!*********************************!*\
+  !*** ./src/ts/common/global.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var Global = {
+    showLoading: function (text) {
+        if (text === void 0) { text = null; }
+        var showText = "加载中...";
+        if (text) {
+            showText = text;
+        }
+        $("#gLoading .loading-text").html(showText);
+        $("#gLoading").css("display", "block");
+    },
+    hideLoading: function () {
+        $("#gLoading").css("display", "none");
+    },
+    alert: function (text, obj) {
+        if (obj === void 0) { obj = null; }
+        var defaultObj = {
+            time: 2000,
+            title: "提示"
+        };
+        if (obj) {
+            if (typeof obj === "function") {
+                //callback
+                window.layer.alert(text, defaultObj, obj);
+            }
+            else {
+                $.extend(obj, defaultObj);
+                window.layer.alert(text, obj);
+            }
+        }
+        else {
+            window.layer.alert(text, defaultObj);
+        }
+    }
+};
+exports.default = Global;
+
+
+/***/ }),
+
+/***/ "./src/ts/pages/essays-archive.ts":
+/*!****************************************!*\
+  !*** ./src/ts/pages/essays-archive.ts ***!
+  \****************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__webpack_require__(/*! ../../scss/pages/essay-archive.scss */ "./src/scss/pages/essay-archive.scss");
+var Paging_1 = __importDefault(__webpack_require__(/*! ../../../common/Paging */ "./common/Paging.ts"));
+__webpack_require__(/*! ../../../common/extensions/global */ "./common/extensions/global.ts");
+var util_1 = __importDefault(__webpack_require__(/*! ../../../common/util */ "./common/util.ts"));
+var global_1 = __importDefault(__webpack_require__(/*! ../common/global */ "./src/ts/common/global.ts"));
+(function () {
+    var trivialListApi = "/api/Essays/Archive";
+    var paging = new Paging_1.default("#paginationContainer", function (page) {
+        window.location.href = "/Essays/Archive?page=" + page;
+    }, false);
+    var parseData = function (data) {
+        var html = data.map(function (item) {
+            var tagHtmlStr = item.Tags.split("|")
+                .map(function (tag) {
+                return "<span class=\"badge badge-info\">" + tag + "</span>";
+            }).join(" ");
+            var liStr = "<li>\n                    <div class=\"date col-lg-3 col-md-3 col-sm-3 col-12\">\n                        <span>" + item.Modify.iso8601ToDate().format("yyyy-MM-dd HH:mm:ss") + "</span>\n                    </div>\n                    <div class=\"main col-lg-9 col-md-9 col-sm-9 col-12\">\n                        <h3><a href=\"/Essays/Details/" + item.Slug + "\">" + item.Title + "</a></h3>\n                        <div>\n                            <span class=\"fa fa-tags\">" + tagHtmlStr + "</span>\n                            <span class=\"fa fa-eye\">" + item.ReadNum + "</span>\n                            <span class=\"fa fa-thumbs-up\">" + item.Praise + "</span>\n                            <span class=\"fa fa-thumbs-down\">" + item.Criticize + "</span>\n                        </div>\n                    </div>\n                </li>";
+            return liStr;
+        }).join(" ");
+        $("#trivialMain .timeline").html(html);
+    };
+    function getData(page) {
+        if (page === void 0) { page = 1; }
+        var data = {
+            page: page,
+        };
+        global_1.default.showLoading();
+        $.ajax({
+            type: "get",
+            url: trivialListApi,
+            data: data,
+            success: function (msg) {
+                var pagingData = msg.Data;
+                parseData(pagingData.Data);
+                paging.createPagingLi(pagingData.PageIndex, pagingData.TotalPages);
+            },
+            complete: function () {
+                global_1.default.hideLoading();
+            }
+        });
+    }
+    var page = util_1.default.pickUpUrlParams().get("page");
+    if (!page) {
+        getData();
+    }
+    else {
+        getData(parseInt(page));
+    }
+})();
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/ts/pages/essays-archive.ts");
+/******/ 	
+/******/ })()
+;
+//# sourceMappingURL=essays-archive.bundle.js.map
